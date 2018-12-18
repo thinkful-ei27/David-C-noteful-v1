@@ -49,3 +49,11 @@ notes.create({title: 'newest title', content: 'so new'}, (err, item) => {
       console.log('not okay');
     }
   });
+
+  notes.delete(1010, (err, item) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('okay');
+    }
+  });
