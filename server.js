@@ -17,9 +17,13 @@ const express = require('express');
 
 const app = express();
 
+app.use(requestLogger);
+
 app.use(express.static('public'));
 
-app.use(requestLogger);
+app.use(express.json());
+
+
 
 app.get('/api/notes', (req, res, next) => {
   const { searchTerm } = req.query;
