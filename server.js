@@ -5,6 +5,8 @@ const data = require('./db/notes');
 
 const { PORT } = require('./config');
 
+const { requestLogger } = require('./middleware/logger');
+
 console.log('Hello Noteful!');
 
 const express = require('express');
@@ -12,6 +14,8 @@ const express = require('express');
 const app = express();
 
 app.use(express.static('public'));
+
+app.use(requestLogger);
 
 app.get('/api/notes', (req, res) => {
     // res.json(data);
@@ -37,6 +41,14 @@ app.get('/api/notes/:id', (req, res) => {
   res.json(note);
 
 });
+
+app.use(function (req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  res.status(404).json({ message: 'Not Found' });
+});
+
+{}
 
 app.listen(PORT, function () {
   console.info(`Server listening on ${this.address().port}`);
