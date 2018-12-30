@@ -17,7 +17,7 @@ const api = {
       type: 'GET',
       dataType: 'json',
       url: `/api/notes/${id}`,
-      data: query
+
     });
   },
 
